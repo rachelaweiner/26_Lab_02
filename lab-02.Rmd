@@ -1,7 +1,7 @@
 ---
 title: "Lab 02 - Plastic waste"
-author: "Insert your name here"
-date: "Insert date here"
+author: "Rachel Weiner"
+date: "January 22, 2026"
 output: github_document
 ---
 
@@ -19,17 +19,30 @@ plastic_waste <- read.csv("data/plastic-waste.csv")
 
 ### Exercise 1
 
-Remove this text, and add your answer for Exercise 1 here.
-
-```{r plastic-waste-continent}
-# insert code here
+Histograms of plastic waste per capita, faceted by continent:
+```{r}
+ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap)) +
+  geom_histogram(binwidth = 0.2) + 
+  facet_wrap(~ continent)
 ```
+The six histograms above help us to visualize plastic waste per capita across the six respective continents. It seems that Oceania and South America has the lowest plastic waste per capita compared to the other continents while Africa, Asia, Europe, and North American seem to have greater plastic waste per capita. 
 
 ### Exercise 2
 
+Density curves!
 ```{r plastic-waste-density}
-# insert code here
+ggplot(
+  data = plastic_waste,
+  mapping = aes(
+    x = plastic_waste_per_cap,
+    color = continent,
+    fill = continent
+  )
+) +
+  geom_density(alpha = 0.1)
 ```
+This density curve allows us to visualize plastic waste per capita in a color-coded format. As far as the code goes, we define color and fill within the mapping aesthetics as this helps tell r which variables we want to display from the larger data set. On the other hand, we define the aplha level within the plotting geom as this does not pertain to the data itself but instead to the formatting of the plot, seperate from any data implications.
+
 
 ### Exercise 3
 
