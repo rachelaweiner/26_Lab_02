@@ -104,7 +104,16 @@ This scatterplot plots plastic waste per capita by coastal population, demonstra
 Remove this text, and add your answer for Exercise 5 here.
 
 ```{r recreate-viz}
-# insert code here
+plastic_waste <- plastic_waste %>%
+  mutate(coastal_pop_prop = coastal_pop / total_pop)%>%
+  filter(plastic_waste_per_cap <= 3)
+ggplot(plastic_waste, aes(x = coastal_pop_prop, y= plastic_waste_per_cap))+
+  geom_point(aes(color = continent))+
+  geom_smooth(color = "black")+
+  labs(title = "Plastic Waste vs. Coastal Population Proportion", subtitle = "By Continent", 
+       x = "Coastal Population Porportion (Coastal/Total Population)", 
+       y = "Plastic Waste Per Capita", color = "continent")
+
 ```
 
 
