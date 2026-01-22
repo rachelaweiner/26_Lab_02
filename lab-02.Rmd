@@ -22,9 +22,10 @@ plastic_waste <- read.csv("data/plastic-waste.csv")
 Histograms of plastic waste per capita, faceted by continent:
 ```{r}
 ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap)) +
-  geom_histogram(binwidth = 0.2) + 
+  geom_histogram(binwidth = .2) + 
   facet_wrap(~ continent)
 ```
+
 The six histograms above help us to visualize plastic waste per capita across the six respective continents. It seems that Oceania and South America has the lowest plastic waste per capita compared to the other continents while Africa, Asia, Europe, and North American seem to have greater plastic waste per capita. 
 
 ### Exercise 2
@@ -41,36 +42,62 @@ ggplot(
 ) +
   geom_density(alpha = 0.1)
 ```
-This density curve allows us to visualize plastic waste per capita in a color-coded format. As far as the code goes, we define color and fill within the mapping aesthetics as this helps tell r which variables we want to display from the larger data set. On the other hand, we define the aplha level within the plotting geom as this does not pertain to the data itself but instead to the formatting of the plot, seperate from any data implications.
 
+This density curve allows us to visualize plastic waste per capita in a color-coded format. As far as the code goes, we define color and fill within the mapping aesthetics as this helps tell r which variables we want to display from the larger data set. On the other hand, we define the aplha level within the plotting geom as this does not pertain to the data itself but instead to the formatting of the plot, separate from any data implications.
 
 ### Exercise 3
 
-Remove this text, and add your answer for Exercise 3 here.
+Box plots!
+```{r}
+ ggplot(
+  data = plastic_waste,
+  mapping = aes(
+    x = continent,
+    y = plastic_waste_per_cap
+  )
+) +
+  geom_boxplot()
+```
+This is a side-by-side box plot. It is quite difficult to read, lets try something else. 
 
 ```{r plastic-waste-violin}
-# insert code here
+ggplot(plastic_waste, aes(x = plastic_waste_per_cap, y = continent)) +
+  geom_violin()
 ```
+
+This is a violin plot, it is another way to visualize data. It is very helpful in visualizing outliers specifically, as seen in North America. I think the different shapes are a cool way to visualize data.
 
 ### Exercise 4
 
-Remove this text, and add your answer for Exercise 4 here.
+Let's try a scatterplot.
 
 ```{r plastic-waste-mismanaged}
-# insert code here
+ggplot(plastic_waste, aes(x = plastic_waste_per_cap, y = mismanaged_plastic_waste_per_cap)) +
+  geom_point()
 ```
+
+This scatterplot plots the relationship between plastic waste per capita by mismanaged waste per capita. The relationship between these two variables appears to be a moderate positive association as plastic waste per capita increases, mismanaged waste per capita increases as well. This makes sense as a country with more plastic waste would have more plastic waste to mismanage.
 
 ```{r plastic-waste-mismanaged-continent}
-# insert code here
+ggplot(plastic_waste, aes(x = plastic_waste_per_cap, y = mismanaged_plastic_waste_per_cap, color = continent)) +
+  geom_point()
 ```
+Now that we have colored each point to it's respective continent, we are able to more clearly visualize associations between the relationship between plastic waste per capita and mismanaged waste per capita in relation to specific continents. Though it is not super clear, we are able to see trends and patterns. 
 
-```{r plastic-waste-population-total}
-# insert code here
-```
+Here are two scatterplots plotting plastic waste per capita by total population and then by coastal population.
 
 ```{r plastic-waste-population-coastal}
-# insert code here
+ggplot(plastic_waste, aes(x = plastic_waste_per_cap, y = total_pop)) +
+  geom_point()
 ```
+
+This scatterplot plots plastic waste per capita by total population, demonstrating a weak association.
+
+```{r}
+ggplot(plastic_waste, aes(x = plastic_waste_per_cap, y = coastal_pop)) +
+  geom_point()
+```
+This scatterplot plots plastic waste per capita by coastal population, demonstrating a slightly stronger association.
 
 ### Exercise 5
 
