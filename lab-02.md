@@ -89,11 +89,13 @@ Box plots!
   geom_boxplot()
 ```
 
-![](lab-02_files/figure-gfm/unnamed-chunk-2-1.png)<!-- --> This is a
-side-by-side box plot that helps us to visualize details pertaining to
-measures of central tendency (mean) as box plots provide us with more
-information than others. These are also helpful when looking for
-outliers in the data as represented by the black data points.
+![](lab-02_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+
+This is a side-by-side box plot that helps us to visualize details
+pertaining to measures of central tendency (mean) as box plots provide
+us with more information than others. These are also helpful when
+looking for outliers in the data as represented by the black data
+points.
 
 On to the next!
 
@@ -104,13 +106,19 @@ ggplot(plastic_waste, aes(x = plastic_waste_per_cap, y = continent)) +
 
 ![](lab-02_files/figure-gfm/plastic-waste-violin-1.png)<!-- -->
 
-This is a violin plot, it is another way to visualize data. This form of
-data visualization may be my favorite because I really like the funky
+This is a violin plot, it is another way to visualize data. These violin
+plots reveal the shape of the distribution which is not presented as
+well in the previous box plots. For example, in the violin plot, we are
+able to see peaks in the data while also gauging the density presented
+in each case. On the other hand, side-by-side box plots provide us with
+details such as measures of central tendency in the form of means as
+well as descriptive measures such a ranges. Violin plots may be my
+favorite form of data visualization because I really like the funky
 shapes!
 
 ### Exercise 4
 
-Let’s try a scatterplot.
+Let’s try a scatter plot.
 
 ``` r
 ggplot(plastic_waste, aes(x = plastic_waste_per_cap, y = mismanaged_plastic_waste_per_cap)) +
@@ -119,12 +127,14 @@ ggplot(plastic_waste, aes(x = plastic_waste_per_cap, y = mismanaged_plastic_wast
 
 ![](lab-02_files/figure-gfm/plastic-waste-mismanaged-1.png)<!-- -->
 
-This scatterplot plots the relationship between plastic waste per capita
-by mismanaged waste per capita. The relationship between these two
-variables appears to be a moderate positive association as plastic waste
-per capita increases, mismanaged waste per capita increases as well.
-This makes sense as a country with more plastic waste would have more
-plastic waste to mismanage.
+This scatter plot demonstrates the relationship between plastic waste
+per capita by mismanaged waste per capita. The relationship between
+these two variables appears to be a moderate positive association as
+plastic waste per capita increases, mismanaged waste per capita
+increases as well. This makes sense as a country with more plastic waste
+would have more plastic waste to mismanage.
+
+Lets add color!
 
 ``` r
 ggplot(plastic_waste, aes(x = plastic_waste_per_cap, y = mismanaged_plastic_waste_per_cap, color = continent)) +
@@ -132,13 +142,16 @@ ggplot(plastic_waste, aes(x = plastic_waste_per_cap, y = mismanaged_plastic_wast
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-mismanaged-continent-1.png)<!-- -->
-Now that we have colored each point to it’s respective continent, we are
-able to more clearly visualize associations between the relationship
-between plastic waste per capita and mismanaged waste per capita in
-relation to specific continents. Though it is not super clear, we are
-able to see trends and patterns.
 
-Here are two scatterplots plotting plastic waste per capita by total
+Now that we have color-coded each point to it’s respective continent, we
+are able to more clearly visualize the relationship between plastic
+waste per capita and mismanaged waste per capita and whether trends
+exist depending on continents. From this view, We can tell that there is
+a much more clear linear association between these two variables within
+the continent of Africa specifically as the red dots form a very strong
+positive linear line compared to the other dots.
+
+Here are two scatter plots plotting plastic waste per capita by total
 population and then by coastal population.
 
 ``` r
@@ -151,7 +164,7 @@ ggplot(plastic_waste, aes(x = plastic_waste_per_cap, y = total_pop)) +
 
 ![](lab-02_files/figure-gfm/plastic-waste-population-coastal-1.png)<!-- -->
 
-This scatterplot plots plastic waste per capita by total population,
+This scatter plot plots plastic waste per capita by total population,
 demonstrating a weak association.
 
 ``` r
@@ -159,9 +172,13 @@ ggplot(plastic_waste, aes(x = plastic_waste_per_cap, y = coastal_pop)) +
   geom_point()
 ```
 
-![](lab-02_files/figure-gfm/unnamed-chunk-3-1.png)<!-- --> This
-scatterplot plots plastic waste per capita by coastal population,
-demonstrating a slightly stronger association.
+![](lab-02_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
+This scatter plot plots plastic waste per capita by coastal population,
+demonstrating a slightly stronger association but still relatively weak.
+
+In terms of a linear association, I do not think that there is a
+significant difference in the two plots regarding linearity.
 
 ### Exercise 5
 
@@ -187,11 +204,12 @@ ggplot(plastic_waste, aes(x = coastal_pop_prop, y= plastic_waste_per_cap))+
     ## Warning: Removed 10 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](lab-02_files/figure-gfm/recreate-viz-1.png)<!-- --> Now that we have
-visualized the proportion of coastal populations by plastic waste per
-capita, we are able to collect a clear understanding of both the
-strength of this association while gauging whether this association is
-dependent on continent.
+![](lab-02_files/figure-gfm/recreate-viz-1.png)<!-- -->
+
+Now that we have visualized the proportion of coastal populations by
+plastic waste per capita, we are able to collect a clear understanding
+of both the strength of this association while gauging whether this
+association is dependent on continent.
 
 According to this scatter plot, there is a weak positive association
 between coastal population proportion and plastic waste per capita as
@@ -200,6 +218,12 @@ that greater coastal population proportions are associated with greater
 plastic waste per capita.
 
 Additionally, the color coding by continents allows us to visualize
-trends such as that of Africa. In Africa, it seems that with low
-proportions of coastal populations, they do not see any increases in
-plastic waste per capita.
+trends such as that of Africa. In Africa, it seems that as their coastal
+population proportion increases, plastic waste per capita increases as
+well. This tells us that the linear association between these two
+variables appears to be relevant on the continent of Africa
+specifically. Though this might be the case for other continents as
+well, this is just an example of how color-coding can help us understand
+data visualizations.
+
+## Thank you and I hope you have a wonderful day!
