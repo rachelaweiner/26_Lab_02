@@ -32,15 +32,27 @@ ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap)) +
 
 The six histograms above help us to visualize plastic waste per capita
 across the six respective continents. It seems that Oceania and South
-America has the lowest plastic waste per capita compared to the other
-continents while Africa, Asia, Europe, and North American seem to have
-greater plastic waste per capita.
+America have the lowest plastic waste per capita compared to the other
+continents while Africa, Asia, Europe, and North America seem to have
+greater plastic waste per capita as displayed in the histograms above.
+
+We also are able to visualize any potential outliers present in our
+data. As seen in the North America histogram, there is an outlier with a
+plastic waste per capita value of 3.6. This value is associated with
+Trinidad and Tobago as they are experiencing a plstic waste crisis and
+possess one of the greatest plastic waste per capita values across the
+globe. Though important, this value will skew our visualizations and
+therefore, I have filtered Trinidad and Tobago from the plastic waste
+data set for the purpose of constructing valuable plots.
 
 ### Exercise 2
 
 Density curves!
 
 ``` r
+plastic_waste <- plastic_waste %>%
+  mutate(coastal_pop_prop = coastal_pop / total_pop)%>%
+  filter(plastic_waste_per_cap <= 3)
 ggplot(
   data = plastic_waste,
   mapping = aes(
@@ -52,14 +64,11 @@ ggplot(
   geom_density(alpha = 0.1)
 ```
 
-    ## Warning: Removed 51 rows containing non-finite outside the scale range
-    ## (`stat_density()`).
-
 ![](lab-02_files/figure-gfm/plastic-waste-density-1.png)<!-- -->
 
 This density curve allows us to visualize plastic waste per capita in a
 color-coded format. As far as the code goes, we define color and fill
-within the mapping aesthetics as this helps tell r which variables we
+within the mapping aesthetics as this helps tell “r” which variables we
 want to display from the larger data set. On the other hand, we define
 the aplha level within the plotting geom as this does not pertain to the
 data itself but instead to the formatting of the plot, separate from any
@@ -80,26 +89,24 @@ Box plots!
   geom_boxplot()
 ```
 
-    ## Warning: Removed 51 rows containing non-finite outside the scale range
-    ## (`stat_boxplot()`).
-
 ![](lab-02_files/figure-gfm/unnamed-chunk-2-1.png)<!-- --> This is a
-side-by-side box plot. It is quite difficult to read, lets try something
-else.
+side-by-side box plot that helps us to visualize details pertaining to
+measures of central tendency (mean) as box plots provide us with more
+information than others. These are also helpful when looking for
+outliers in the data as represented by the black data points.
+
+On to the next!
 
 ``` r
 ggplot(plastic_waste, aes(x = plastic_waste_per_cap, y = continent)) +
   geom_violin()
 ```
 
-    ## Warning: Removed 51 rows containing non-finite outside the scale range
-    ## (`stat_ydensity()`).
-
 ![](lab-02_files/figure-gfm/plastic-waste-violin-1.png)<!-- -->
 
-This is a violin plot, it is another way to visualize data. It is very
-helpful in visualizing outliers specifically, as seen in North America.
-I think the different shapes are a cool way to visualize data.
+This is a violin plot, it is another way to visualize data. This form of
+data visualization may be my favorite because I really like the funky
+shapes!
 
 ### Exercise 4
 
@@ -109,9 +116,6 @@ Let’s try a scatterplot.
 ggplot(plastic_waste, aes(x = plastic_waste_per_cap, y = mismanaged_plastic_waste_per_cap)) +
   geom_point()
 ```
-
-    ## Warning: Removed 51 rows containing missing values or values outside the scale range
-    ## (`geom_point()`).
 
 ![](lab-02_files/figure-gfm/plastic-waste-mismanaged-1.png)<!-- -->
 
@@ -126,9 +130,6 @@ plastic waste to mismanage.
 ggplot(plastic_waste, aes(x = plastic_waste_per_cap, y = mismanaged_plastic_waste_per_cap, color = continent)) +
   geom_point()
 ```
-
-    ## Warning: Removed 51 rows containing missing values or values outside the scale range
-    ## (`geom_point()`).
 
 ![](lab-02_files/figure-gfm/plastic-waste-mismanaged-continent-1.png)<!-- -->
 Now that we have colored each point to it’s respective continent, we are
@@ -145,7 +146,7 @@ ggplot(plastic_waste, aes(x = plastic_waste_per_cap, y = total_pop)) +
   geom_point()
 ```
 
-    ## Warning: Removed 61 rows containing missing values or values outside the scale range
+    ## Warning: Removed 10 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
 ![](lab-02_files/figure-gfm/plastic-waste-population-coastal-1.png)<!-- -->
@@ -158,16 +159,13 @@ ggplot(plastic_waste, aes(x = plastic_waste_per_cap, y = coastal_pop)) +
   geom_point()
 ```
 
-    ## Warning: Removed 51 rows containing missing values or values outside the scale range
-    ## (`geom_point()`).
-
 ![](lab-02_files/figure-gfm/unnamed-chunk-3-1.png)<!-- --> This
 scatterplot plots plastic waste per capita by coastal population,
 demonstrating a slightly stronger association.
 
 ### Exercise 5
 
-Remove this text, and add your answer for Exercise 5 here.
+Last but not least!
 
 ``` r
 plastic_waste <- plastic_waste %>%
@@ -177,7 +175,7 @@ ggplot(plastic_waste, aes(x = coastal_pop_prop, y= plastic_waste_per_cap))+
   geom_point(aes(color = continent))+
   geom_smooth(color = "black")+
   labs(title = "Plastic Waste vs. Coastal Population Proportion", subtitle = "By Continent", 
-       x = "Coastal Population Porportion (Coastal/Total Population)", 
+       x = "Coastal Population Proportion", 
        y = "Plastic Waste Per Capita", color = "continent")
 ```
 
@@ -189,4 +187,19 @@ ggplot(plastic_waste, aes(x = coastal_pop_prop, y= plastic_waste_per_cap))+
     ## Warning: Removed 10 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](lab-02_files/figure-gfm/recreate-viz-1.png)<!-- -->
+![](lab-02_files/figure-gfm/recreate-viz-1.png)<!-- --> Now that we have
+visualized the proportion of coastal populations by plastic waste per
+capita, we are able to collect a clear understanding of both the
+strength of this association while gauging whether this association is
+dependent on continent.
+
+According to this scatter plot, there is a weak positive association
+between coastal population proportion and plastic waste per capita as
+the smooth black line traces the gradual positive progression expressing
+that greater coastal population proportions are associated with greater
+plastic waste per capita.
+
+Additionally, the color coding by continents allows us to visualize
+trends such as that of Africa. In Africa, it seems that with low
+proportions of coastal populations, they do not see any increases in
+plastic waste per capita.
